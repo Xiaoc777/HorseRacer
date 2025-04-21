@@ -1,6 +1,5 @@
 package main;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
@@ -12,7 +11,7 @@ import java.lang.Math;
  */
 public class Race {
 
-    private int raceLength;
+    private final int raceLength;
     private Horse lane1Horse;
     private Horse lane2Horse;
     private Horse lane3Horse;
