@@ -1,3 +1,4 @@
+package main;
 
 /**
  * Write a description of class Horse here.
@@ -7,7 +8,7 @@
  */
 public class Horse {
     // === Private Fields ===
-    private final String name;        // Horse's name
+    private final String name;        // main.Horse's name
     private char symbol;              // Unicode character representing the horse
     private int distanceTravelled;    // How far the horse has moved
     private boolean hasFallen;        // Whether the horse has fallen
