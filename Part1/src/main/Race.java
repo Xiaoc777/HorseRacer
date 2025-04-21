@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
@@ -173,7 +174,7 @@ public class Race {
      * Print the race on the terminal
      */
     private void printRace() {
-        System.out.print('\u000C');  //clear the terminal window
+        // System.out.print('\u000C');  //clear the terminal window
 
         multiplePrint('=', raceLength + 3); //top edge of track
         System.out.println();
@@ -211,7 +212,7 @@ public class Race {
         //if the horse has fallen then print dead
         //else print the horse's symbol
         if (theHorse.hasFallen()) {
-            System.out.print('\u2322');
+            System.out.print("\u2322 ");
         } else {
             System.out.print(theHorse.getSymbol());
         }
@@ -223,7 +224,7 @@ public class Race {
         System.out.print('|');
 
         // print the confidence level of the horse
-        System.out.print(" " + theHorse.getName() + "(Confidence: " + String.format("%.2f",
+        System.out.print(" " + theHorse.getName() + " (Confidence: " + String.format("%.2f",
                 theHorse.getConfidence()) + ")");
     }
 
