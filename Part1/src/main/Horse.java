@@ -2,11 +2,12 @@ package main;
 
 /**
  * Write a description of class Horse here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class Horse {
+
     // === Private Fields ===
     private final String name;        // main.Horse's name
     private char symbol;              // Unicode character representing the horse
