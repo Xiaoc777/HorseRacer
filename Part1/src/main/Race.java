@@ -52,7 +52,7 @@ public class Race {
      * Start the race The horse are brought to the start and then repeatedly moved forward until the
      * race is finished
      */
-    public void startRace() {
+    public RaceResults startRace() {
         //declare a local variable to tell us when the race is finished
         boolean finished = false;
 
@@ -117,9 +117,21 @@ public class Race {
             }
         }
 
+        boolean isThereAWinner = false;
+        String horseWon = null;
+
+        int horsesFallen = 0;
+        int[] distancesTravelled = new int[3];
+        for (int i = 0; i < 3; i ++) {
+            if (horses[i].hasFallen()) horsesFallen++;
+            distancesTravelled[i] = horses[i].getDistanceTravelled();
+        }
+
         System.out.println("==================");
         if (winnerCount == 1) {
-            System.out.println("And the winner is… " + winners[0].getName() + "!");
+            isThereAWinner = true;
+            horseWon =  winners[0].getName();
+            System.out.println("And the winner is… " + horseWon + "!");
         } else if (winnerCount > 1) {
             System.out.print("It’s a tie between: ");
             for (int i = 0; i < winnerCount; i++) {
@@ -133,6 +145,8 @@ public class Race {
             System.out.println("No winners – all horses fell! 😢");
         }
         System.out.println("==================");
+
+        return new RaceResults(isThereAWinner, horseWon, horsesFallen, distancesTravelled);
     }
 
     /**
