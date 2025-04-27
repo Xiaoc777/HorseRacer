@@ -60,7 +60,7 @@ public class RaceGUI extends JFrame {
         add(trackPanel, BorderLayout.CENTER);
 
         // Start Button action
-        startButton.addActionListener((ActionEvent e) -> {
+        startButton.addActionListener((ActionEvent _) -> {
             try {
                 laneCount = Integer.parseInt(laneInput.getText());
                 trackLength = Integer.parseInt(lengthInput.getText());
