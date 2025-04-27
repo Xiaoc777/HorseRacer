@@ -1,13 +1,10 @@
 package main;
 
-/* TODO: Tasks to work on:-
-       1) Add a moving finishing line that can be adjusted by the user.
-       2) Change the textbox for race length into a slider with min 10 and max 40.
- */
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +23,8 @@ public class RaceGUI extends JFrame {
 
     private final Random random = new Random();
 
+    private JSlider lengthSlider;
+
     public RaceGUI() {
         setTitle("Horse Race Simulator");
         setSize(1000, 600);
@@ -35,13 +34,18 @@ public class RaceGUI extends JFrame {
         // Control Panel
         JPanel controlPanel = new JPanel();
         JTextField laneInput = new JTextField(String.valueOf(laneCount), 5);
-        JTextField lengthInput = new JTextField(String.valueOf(trackLength), 5);
+        lengthSlider = new JSlider(10, 40, trackLength);
+        lengthSlider.setMajorTickSpacing(10);
+        lengthSlider.setMinorTickSpacing(1);
+        lengthSlider.setPaintTicks(true);
+        lengthSlider.setPaintLabels(true);
+
         JButton startButton = new JButton("Start Race");
 
         controlPanel.add(new JLabel("Lanes:"));
         controlPanel.add(laneInput);
         controlPanel.add(new JLabel("Track Length:"));
-        controlPanel.add(lengthInput);
+        controlPanel.add(lengthSlider);
         controlPanel.add(startButton);
 
         // Track Panel
@@ -63,7 +67,7 @@ public class RaceGUI extends JFrame {
         startButton.addActionListener((ActionEvent _) -> {
             try {
                 laneCount = Integer.parseInt(laneInput.getText());
-                trackLength = Integer.parseInt(lengthInput.getText());
+                trackLength = lengthSlider.getValue();
                 setupHorses();
                 runRace();
             } catch (NumberFormatException ex) {
@@ -76,7 +80,6 @@ public class RaceGUI extends JFrame {
         horses = new ArrayList<>();
         for (int i = 0; i < laneCount; i++) {
             char symbol = (char) ('A' + i);
-            // Randomize breed and color individually for each horse
             String breed = breeds[random.nextInt(breeds.length)];
             String color = colors[random.nextInt(colors.length)];
             String name = breed + " #" + (i + 1);
@@ -96,12 +99,17 @@ public class RaceGUI extends JFrame {
         // Draw lanes
         for (int i = 0; i < laneCount; i++) {
             if (i % 2 == 0) {
-                g.setColor(new Color(200, 255, 200)); // light green
+                g.setColor(new Color(200, 255, 200));
             } else {
-                g.setColor(new Color(220, 220, 220)); // light grey
+                g.setColor(new Color(220, 220, 220));
             }
             g.fillRect(0, i * laneHeight, trackPanel.getWidth(), laneHeight);
         }
+
+        // Draw finishing line
+        g.setColor(Color.RED);
+        int finishX = 30 + trackLength * 20;
+        g.fillRect(finishX, 0, 5, trackPanel.getHeight());
 
         // Draw horses
         for (int i = 0; i < horses.size(); i++) {
@@ -118,7 +126,6 @@ public class RaceGUI extends JFrame {
                 g.fillOval(x, y, 30, 30);
             }
 
-            // Display horse name above horse
             g.setColor(Color.BLACK);
             g.drawString(h.getName(), x, y + 90);
         }
@@ -161,7 +168,7 @@ public class RaceGUI extends JFrame {
 
                 for (CustomHorse h : horses) {
                     if (h.getDistanceTravelled() >= trackLength) {
-                        JOptionPane.showMessageDialog(this, "🏆 Winner: " + h.getName());
+                        JOptionPane.showMessageDialog(this, "\uD83C\uDFC6 Winner: " + h.getName());
                         finished = true;
                         return;
                     }
@@ -169,7 +176,7 @@ public class RaceGUI extends JFrame {
 
                 if (allFallen) {
                     JOptionPane.showMessageDialog(this,
-                            "💀 All horses have fallen! No winner this time!");
+                            "\uD83D\uDC80 All horses have fallen! No winner this time!");
                     finished = true;
                 }
             }
@@ -180,3 +187,4 @@ public class RaceGUI extends JFrame {
         SwingUtilities.invokeLater(() -> new RaceGUI().setVisible(true));
     }
 }
+
