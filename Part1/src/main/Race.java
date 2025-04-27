@@ -1,5 +1,7 @@
 package main;
 
+import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.lang.Math;
 
@@ -253,5 +255,26 @@ public class Race {
             System.out.print(aChar);
             i = i + 1;
         }
+    }
+
+    public static void main(String[] args) {
+        Race race = new Race(20);
+
+        Scanner input = new Scanner(System.in);
+        Random random = new Random();
+
+        System.out.print("Enter the name of the first Horse: ");
+        Horse horse1 = new Horse('♘', input.nextLine(), random.nextDouble());
+        race.addHorse(horse1, 1);
+
+        System.out.print("Enter the name of the second Horse: ");
+        Horse horse2 = new Horse('♘', input.nextLine(), random.nextDouble());
+        race.addHorse(horse2, 2);
+
+        System.out.print("Enter the name of the third Horse: ");
+        Horse horse3 = new Horse('♘', input.nextLine(), random.nextDouble());
+        race.addHorse(horse3, 3);
+
+        race.startRace();
     }
 }
