@@ -3,8 +3,8 @@
 ## Steps to run the executable jar file for Parts 1 and 2:
 
 1) Install the lastest Java JDK from the website: https://www.oracle.com/uk/java/technologies/downloads
-2) Once installed, open your Terminal (in Mac) or Powershell (in Windows) and head to the `releases/` directory in the project.
-3) Run the code `java -jar Part1.jar` to run Part1 code or `java -jar Part2.jar` for Part2 code.
+2) Once installed, open your Terminal (in Mac) or Powershell (in Windows) and head to the `releases/` directory in the project and download the JAR files `Part1.jar` and `Part2.jar`.
+3) Run the code `java -jar Part1.jar` to run Part1 code or `java -jar Part2.jar` for Part2 code making sure the Terminal is in the directory with those JAR files.
 
 ## Steps to open the project and view the project.
 
